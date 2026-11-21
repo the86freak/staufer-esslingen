@@ -125,8 +125,8 @@
       var r = b.getBoundingClientRect(), z = logo.getBoundingClientRect();
       // Ausschnitt der Linien im 1024x768-Bild (entspricht dem viewBox des Logos)
       var f = document.createElement('img'); f.src = logo.getAttribute('src'); f.className = 'logo-flug'; f.alt = '';
-      f.style.left = (r.left + r.width * (-10 / 1024)) + 'px'; f.style.top = (r.top + r.height * (113 / 768)) + 'px';
-      f.style.width = (r.width * 1044 / 1024) + 'px'; f.style.height = (r.height * 550 / 768) + 'px';
+      f.style.left = (r.left + r.width * (225.9 / 1920)) + 'px'; f.style.top = (r.top + r.height * (158.9 / 1080)) + 'px';
+      f.style.width = (r.width * 1468.1 / 1920) + 'px'; f.style.height = (r.height * 773.4 / 1080) + 'px';
       document.body.appendChild(f); lin.style.opacity = 0;
       requestAnimationFrame(function () { requestAnimationFrame(function () {
         f.style.left = z.left + 'px'; f.style.top = z.top + 'px'; f.style.width = z.width + 'px'; f.style.height = z.height + 'px';
