@@ -1,0 +1,247 @@
+/* Esslingen zur Zeit der Staufer – Web-Fassung 2026 */
+:root {
+  --papier: #f6efdf;
+  --papier-dunkel: #ebdfc4;
+  --tinte: #2e241e;
+  --tinte-hell: #6b5a4c;
+  --rot: #9e2b25;
+  --rot-dunkel: #7a1f1a;
+  --gold: #c9a227;
+  --linie: #d8c8a6;
+  --max: 1200px;
+  --serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --titel: 'Cinzel', 'Trajan Pro', Georgia, serif;
+  --hand: 'Caveat', 'Segoe Print', cursive;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--papier); color: var(--tinte);
+  font: 400 1.08rem/1.65 var(--serif);
+  -webkit-font-smoothing: antialiased;
+}
+img, video, svg { max-width: 100%; height: auto; display: block; }
+a { color: var(--rot); text-underline-offset: .15em; }
+a:hover { color: var(--rot-dunkel); }
+h1, h2, h3 { font-family: var(--titel); font-weight: 700; line-height: 1.2; letter-spacing: .02em; }
+h1 { font-size: clamp(1.8rem, 4vw, 2.7rem); margin: .2em 0 .5em; }
+h2 { font-size: clamp(1.35rem, 2.6vw, 1.8rem); margin: 1.6em 0 .6em; }
+h3 { font-size: 1.15rem; margin: 1.6em 0 .4em; color: var(--rot-dunkel); }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+/* Kopf */
+.kopf {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .4rem 1.5rem;
+  padding: .7rem clamp(1rem, 4vw, 2.5rem);
+  background: rgba(246, 239, 223, .94); backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--linie);
+}
+.marke { font-family: var(--titel); font-weight: 700; font-size: 1.15rem; color: var(--tinte); text-decoration: none; }
+.marke-klein { color: var(--rot); }
+.hauptnav { display: flex; flex-wrap: wrap; gap: .2rem 1.1rem; }
+.hauptnav a { color: var(--tinte); text-decoration: none; font-size: .98rem; padding: .2rem 0; border-bottom: 2px solid transparent; }
+.hauptnav a:hover, .hauptnav a[aria-current="page"] { border-bottom-color: var(--rot); color: var(--rot-dunkel); }
+
+main { max-width: var(--max); margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2.5rem); }
+
+/* Startseite */
+.held { display: grid; grid-template-columns: 1fr 1.05fr; gap: 2.5rem; align-items: center; padding: 3rem 0 2rem; }
+.ueber { font-family: var(--hand); font-size: 1.5rem; color: var(--rot); margin: 0; }
+.held h1 { font-size: clamp(2.4rem, 6vw, 4rem); margin: .1em 0 .4em; }
+.held h1 span { display: block; font-size: .5em; font-weight: 500; color: var(--tinte-hell); letter-spacing: .08em; }
+.knopf {
+  display: inline-block; margin: .3rem .4rem .3rem 0; padding: .6rem 1.2rem; border-radius: 3px;
+  background: var(--rot); color: #fff; text-decoration: none; font-weight: 600;
+}
+.knopf:hover { background: var(--rot-dunkel); color: #fff; }
+.knopf.hell { background: transparent; color: var(--rot); box-shadow: inset 0 0 0 2px var(--rot); }
+.knopf.hell:hover { background: var(--rot); color: #fff; }
+.held-video, .video { margin: 0; }
+.held-video video, .video video { width: 100%; border-radius: 4px; box-shadow: 0 8px 28px rgba(46, 36, 30, .25); background: #000; }
+figcaption { font-size: .9rem; color: var(--tinte-hell); margin-top: .45rem; }
+
+.plan-bereich { padding: 1rem 0 2rem; border-top: 1px solid var(--linie); }
+.plan-kopf { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+.zeit { display: inline-flex; border: 2px solid var(--rot); border-radius: 4px; overflow: hidden; }
+.zeit button {
+  font: 600 .95rem var(--serif); padding: .45rem 1rem; border: 0; background: transparent; color: var(--rot); cursor: pointer;
+}
+.zeit button[aria-pressed="true"] { background: var(--rot); color: #fff; }
+.plan-hilfe { color: var(--tinte-hell); margin-top: .2rem; }
+.plan-raster { display: grid; grid-template-columns: minmax(0, 3fr) minmax(220px, 1fr); gap: 2rem; align-items: start; }
+.plan { position: relative; border: 1px solid var(--linie); border-radius: 4px; box-shadow: 0 6px 24px rgba(46, 36, 30, .15); overflow: hidden; }
+.plan-tipp {
+  position: absolute; pointer-events: none; transform: translate(-50%, calc(-100% - 18px));
+  background: var(--tinte); color: #fff; font-size: .92rem; padding: .25rem .6rem; border-radius: 3px; white-space: nowrap;
+}
+.stationsliste { list-style: none; margin: 0; padding: 0; counter-reset: none; }
+.stationsliste li { border-bottom: 1px solid var(--linie); }
+.stationsliste a { display: flex; align-items: center; gap: .75rem; padding: .55rem .2rem; color: var(--tinte); text-decoration: none; }
+.stationsliste a:hover, .stationsliste a.aktiv { color: var(--rot-dunkel); background: var(--papier-dunkel); }
+.nr {
+  flex: none; width: 1.9rem; height: 1.9rem; border-radius: 50%; display: grid; place-items: center;
+  background: var(--rot); color: #fff; font-weight: 700; font-size: .9rem;
+}
+.plan-quelle { font-size: .85rem; color: var(--tinte-hell); }
+
+.weitere { padding: 1rem 0 3rem; border-top: 1px solid var(--linie); }
+.karten { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+.karte {
+  display: block; padding: 1.1rem 1.2rem; background: #fbf7ec; border: 1px solid var(--linie); border-radius: 4px;
+  color: var(--tinte); text-decoration: none; transition: transform .15s, box-shadow .15s;
+}
+.karte:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(46, 36, 30, .15); color: var(--tinte); }
+.karte h3 { margin: 0 0 .3rem; color: var(--rot-dunkel); }
+.karte p { margin: 0; font-size: .95rem; color: var(--tinte-hell); }
+
+/* Kapitel */
+.kapitel { padding: 2rem 0 3rem; }
+.kap-kopf { border-bottom: 2px solid var(--rot); margin-bottom: 1.8rem; }
+.station { font-family: var(--hand); font-size: 1.45rem; color: var(--rot); margin: 0; }
+.kap-raster.mit-medien { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 2.5rem; align-items: start; }
+.kap-text { max-width: 68ch; }
+.kap-text p { margin: 0 0 1em; hyphens: auto; }
+.kap-text h3:first-child { margin-top: 0; }
+.kap-medien { position: sticky; top: 5rem; }
+.kap-medien > * + * { margin-top: 1.4rem; }
+.schmal .kap-text { max-width: 75ch; }
+.liste { columns: 2; padding-left: 1.2rem; }
+.url { font-size: .9rem; word-break: break-all; margin: 0 0 .3em !important; }
+.hinweis { background: var(--papier-dunkel); border-left: 4px solid var(--gold); padding: .7rem 1rem; font-size: .95rem; }
+.platzhalter { background: #fff3c4; padding: .6rem 1rem; }
+figure.im-text { margin: 1rem 0 1.5rem; padding: 1rem; background: #fff; border: 1px solid var(--linie); }
+.gal-titel { font-size: 1.2rem; margin: 1.8rem 0 .7rem; }
+
+.galerie { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: .9rem; }
+.g-item { margin: 0; }
+.g-item a { display: block; background: #fff; border: 1px solid var(--linie); border-radius: 3px; overflow: hidden; aspect-ratio: 4 / 3; }
+.g-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .25s; }
+.g-item img[src$=".svg"] { object-fit: contain; padding: 6px; }
+.g-item a:hover img { transform: scale(1.04); }
+.g-item figcaption { font-family: var(--hand); font-size: 1.12rem; line-height: 1.2; color: var(--tinte); }
+.kap-medien .galerie:only-child, .kap-medien .galerie:first-child { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+
+.blaettern { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--linie); }
+.blaettern a { text-decoration: none; font-weight: 600; }
+.blaettern .plan { border: 0; box-shadow: none; font-family: var(--hand); font-size: 1.35rem; }
+
+/* Lightbox */
+.lightbox {
+  position: fixed; inset: 0; z-index: 50; background: rgba(20, 15, 12, .92);
+  display: grid; grid-template-columns: 3.5rem 1fr 3.5rem; align-items: center;
+}
+.lightbox[hidden] { display: none; }
+.lightbox figure { margin: 0; text-align: center; }
+.lightbox img { max-height: 82vh; max-width: 100%; margin: 0 auto; background: #fff; }
+.lightbox figcaption { color: #f1e8d6; font-size: 1rem; }
+.lightbox figcaption small { display: block; color: #b9ab93; font-size: .82rem; }
+.lightbox button { background: none; border: 0; color: #fff; font-size: 2.6rem; cursor: pointer; padding: .5rem; }
+.lb-zu { position: absolute; top: .4rem; right: .8rem; }
+
+/* Fuß */
+.fuss { text-align: center; font-size: .9rem; color: var(--tinte-hell); padding: 2rem 1rem 2.5rem; border-top: 1px solid var(--linie); background: var(--papier-dunkel); }
+.fuss p { margin: .2rem 0; }
+
+@media (max-width: 860px) {
+  .held, .plan-raster, .kap-raster.mit-medien { grid-template-columns: 1fr; }
+  .held { padding-top: 1.5rem; }
+  .kap-medien { position: static; }
+  .stationsliste { columns: 2; column-gap: 1.2rem; }
+  .liste { columns: 1; }
+}
+@media (max-width: 520px) {
+  .stationsliste { columns: 1; }
+  .lightbox { grid-template-columns: 2.4rem 1fr 2.4rem; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+@media print {
+  .kopf, .fuss, .blaettern, .lightbox, video { display: none !important; }
+  .kap-raster.mit-medien { display: block; }
+}
+.g-item figcaption small.angelehnt { display: block; font-family: var(--serif); font-size: .74rem; line-height: 1.3; color: var(--tinte-hell); margin-top: .15rem; }
+.audio { margin: 0; background: #fbf7ec; border: 1px solid var(--linie); border-radius: 4px; padding: .7rem .9rem; }
+.audio figcaption { margin: 0 0 .5rem; color: var(--tinte); font-weight: 600; }
+.audio audio { width: 100%; }
+
+
+/* PLAN-ZEIT */
+.zeit-1250 .nur1350, .zeit-1350 .nur1250 { display: none; }
+.plan-bereich .zeit { align-items: center; gap: 0; }
+.zeit-label { font-family: var(--hand); font-size: 1.3rem; color: var(--rot); padding: 0 .7rem; }
+.plan-bereich .zeit button { font-size: 1.05rem; padding: .55rem 1.2rem; }
+.stadtplan .zeitknopf { cursor: pointer; }
+.stadtplan .zeitknopf .zk-feld { transition: fill .2s; }
+.stadtplan .zeitknopf:hover .zk-feld, .stadtplan .zeitknopf:focus .zk-feld { filter: brightness(1.08); }
+.zeit-1250 .stadtplan .zeitknopf[data-zeit="1250"] .zk-feld, .zeit-1350 .stadtplan .zeitknopf[data-zeit="1350"] .zk-feld { fill: #9e2b25; }
+.zeit-1250 .stadtplan .zeitknopf[data-zeit="1250"] .zk-text, .zeit-1350 .stadtplan .zeitknopf[data-zeit="1350"] .zk-text { fill: #fff; }
+.zeit-1250 .stationsliste .nur1350 { opacity: .45; }
+.zeit-1250 .stationsliste .nur1350 { display: list-item; }
+
+
+/* KARTE-V2 */
+.stadtplan .gebiet{font:700 21px Georgia,serif;font-variant:small-caps;letter-spacing:.08em;fill:#4a3626;paint-order:stroke;stroke:#f4ead2;stroke-width:4px}
+.stadtplan .gebiet-klein{font:700 14px Georgia,serif;font-variant:small-caps;letter-spacing:.06em;fill:#4a3626;paint-order:stroke;stroke:#f4ead2;stroke-width:3px}
+.stadtplan .fluss{font:italic 600 24px Georgia,serif;fill:#3e6f86;letter-spacing:.3em}
+.stadtplan .fluss-klein{font:italic 13px Georgia,serif;fill:#3e6f86;letter-spacing:.15em}
+.stadtplan .flur{font:italic 15px Georgia,serif;fill:#7d8452;letter-spacing:.2em}
+.stadtplan .strasse{font:italic 10.5px Georgia,serif;fill:#4a3626;paint-order:stroke;stroke:#f6ecd6;stroke-width:3px}
+.stadtplan .tor{font:600 11px Georgia,serif;fill:#2e241e;paint-order:stroke;stroke:#f4ead2;stroke-width:3px}
+.stadtplan .kloster{font:italic 600 10.5px Georgia,serif;fill:#7a1f1a;paint-order:stroke;stroke:#f4ead2;stroke-width:3px}
+.stadtplan .klein{font:11px Georgia,serif;fill:#4a3626}
+.stadtplan .quelle{font:10px Georgia,serif;fill:#6b5a4c}
+.stadtplan .k-titel{font:700 23px Georgia,serif;font-variant:small-caps;fill:#7a1f1a;letter-spacing:.04em}
+.stadtplan .k-unter{font:italic 11.5px Georgia,serif;fill:#4a3626}
+.stadtplan .zk-feld{fill:#f4ead2;stroke:#9e2b25;stroke-width:1.6}
+.stadtplan .zk-text{font:700 15px Georgia,serif;fill:#9e2b25}
+.zeit-1250 .zeitknopf[data-zeit="1250"] .zk-feld,.zeit-1350 .zeitknopf[data-zeit="1350"] .zk-feld{fill:#9e2b25}
+.zeit-1250 .zeitknopf[data-zeit="1250"] .zk-text,.zeit-1350 .zeitknopf[data-zeit="1350"] .zk-text{fill:#fff}
+.stadtplan .zk-hinweis{font:italic 11px Georgia,serif;fill:#6b5a4c}
+.stadtplan .wr{font:700 13px Georgia,serif;fill:#4a3626}
+.stadtplan .stationen circle{fill:#9e2b25;stroke:#fff;stroke-width:3}
+.stadtplan .stationen text{font:700 15px Georgia,serif;fill:#fff;text-anchor:middle}
+.stadtplan .stationen a circle { transition: transform .15s, fill .15s; transform-box: fill-box; transform-origin: center; }
+.stadtplan .stationen a:hover circle, .stadtplan .stationen a:focus circle, .stadtplan .stationen a.aktiv circle { fill: var(--gold); transform: scale(1.25); }
+.stadtplan .stationen text { pointer-events: none; }
+.stadtplan .stationen a:focus { outline: none; }
+.plan-raster { grid-template-columns: 1fr; }
+.plan-raster .stationsliste { columns: 3; column-gap: 1.5rem; }
+@media (max-width: 860px) { .plan-raster .stationsliste { columns: 2; } }
+@media (max-width: 520px) { .plan-raster .stationsliste { columns: 1; } }
+/* KARTE-V2-ENDE */
+
+.kap-text h3[id] { scroll-margin-top: 5.5rem; }
+/* EINSTIEG-START */
+/* ---------- Einstieg: Film -> Strichzeichnung -> Logo -> Stadtplan */
+.marke { display: inline-flex; align-items: center; gap: .6rem; }
+.marke-logo { height: 40px; width: auto; transition: opacity .4s; }
+.mit-intro body.startseite .marke-logo { opacity: 0; }
+.ohne-intro .einstieg { display: none; }
+.einstieg { margin: 1.2rem 0 2rem; overflow: hidden; transition: max-height 1s ease, margin 1s ease, opacity .6s; max-height: 120vh; }
+.einstieg.zu { max-height: 0; margin: 0; opacity: 0; }
+.buehne { position: relative; aspect-ratio: 4 / 3; max-height: calc(100vh - 7rem); margin: 0 auto; background: #fff;
+  border-radius: 6px; overflow: hidden; box-shadow: 0 10px 34px rgba(46, 36, 30, .22); }
+.buehne .film, .buehne .linien { position: absolute; inset: 0; width: 100%; height: 100%; }
+.buehne .film { object-fit: cover; background: #000; transition: opacity .8s ease; }
+.buehne .linien { opacity: 0; transition: opacity .8s ease; }
+.buehne[data-zustand="start"] .film { filter: brightness(.45) saturate(.8); }
+.buehne[data-zustand="linien"] .film { opacity: 0; }
+.buehne[data-zustand="linien"] .linien { opacity: 1; }
+.buehne .start { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+  padding: 0 clamp(1.2rem, 6%, 4rem); color: #fff; transition: opacity .5s; }
+.buehne .start h1 { color: #fff; font-size: clamp(2.2rem, 6.5vw, 4.6rem); margin: .1em 0 .2em; text-shadow: 0 2px 18px rgba(0,0,0,.45); }
+.buehne .start h1 span { display: block; font-size: .45em; font-weight: 500; letter-spacing: .1em; color: #f3e6cc; }
+.buehne .start .ueber { color: #ffd9a6; }
+.buehne .start .autoren { margin: 0 0 1rem; color: #efe4cf; }
+.buehne .knopf { font: 600 1.05rem var(--serif); border: 0; cursor: pointer; padding: .7rem 1.3rem; }
+.buehne .start .knopf.hell { color: #fff; box-shadow: inset 0 0 0 2px #fff; }
+.buehne .start .knopf small { font-weight: 400; opacity: .85; }
+.buehne:not([data-zustand="start"]) .start { opacity: 0; pointer-events: none; }
+.ueberspringen { position: absolute; right: 1rem; bottom: 1rem; font: 600 .95rem var(--serif); border: 0; border-radius: 3px;
+  padding: .45rem .9rem; cursor: pointer; background: rgba(20, 15, 12, .6); color: #fff; }
+.logo-flug { position: fixed; z-index: 60; pointer-events: none; transition: all 1.3s cubic-bezier(.6, .05, .25, 1); }
+.intro-nochmal { font: 600 .95rem var(--serif); background: none; border: 0; color: var(--rot); cursor: pointer; padding: .3rem 0; }
+.intro-nochmal:hover { text-decoration: underline; }
+.mit-intro .intro-nochmal { visibility: hidden; }
+@media (prefers-reduced-motion: reduce) { .logo-flug, .einstieg { transition: none; } }
+/* EINSTIEG-ENDE */
