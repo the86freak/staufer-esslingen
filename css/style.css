@@ -211,6 +211,12 @@ figure.im-text { margin: 1rem 0 1.5rem; padding: 1rem; background: #fff; border:
 /* KARTE-V2-ENDE */
 
 .kap-text h3[id] { scroll-margin-top: 5.5rem; }
+
+/* Lightbox: feste Spalten, damit ein Einzelbild (ohne Pfeile) nicht in die schmale Randspalte rutscht */
+.lightbox .lb-vor { grid-column: 1; grid-row: 1; }
+.lightbox figure { grid-column: 2; grid-row: 1; min-width: 0; }
+.lightbox .lb-nach { grid-column: 3; grid-row: 1; }
+.lightbox img { min-height: min(60vh, 600px); object-fit: contain; }
 /* EINSTIEG-START */
 /* ---------- Einstieg: Film -> Strichzeichnung -> Logo -> Stadtplan */
 .marke { display: inline-flex; align-items: center; gap: .6rem; }
